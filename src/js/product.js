@@ -5,9 +5,9 @@ const dataSource = new ProductData("tents");
 
 function addProductToCart(product) {
   // Get current products in cart
-  let cart = getLocalStorage("so-cart")
+  let cart = getLocalStorage("so-cart");
   // If there are no products in cart, create an empty array
-  if (cart == null){
+  if (cart == null) {
     cart = [];
   }
   // Add the selected product into the cart
