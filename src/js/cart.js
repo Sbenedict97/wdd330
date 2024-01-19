@@ -3,7 +3,7 @@ import { getLocalStorage } from "./utils.mjs";
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
   if (cartItems == null){
-    document.querySelector(".product-list").innerHTML = "Your cart is empty";
+    document.querySelector(".product-list").innerHTML = "Ready to fill your cart with camping wonders. Let the shopping adventure begin!";
   }
   else {
     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
