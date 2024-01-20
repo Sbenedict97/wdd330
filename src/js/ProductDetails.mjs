@@ -1,6 +1,9 @@
 import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 
 function productDetailsTemplate(product){
+    let discount = 100 - ((100 / product.SuggestedRetailPrice) * product.FinalPrice);
+    discount = parseInt(discount);
+
     return `<section class="product-detail">
     <h3>${product.Brand.Name}</h3>
 
@@ -12,7 +15,8 @@ function productDetailsTemplate(product){
       alt="${product.NameWithoutBrand}"
     />
 
-    <p class="product-card__price">$${product.FinalPrice}</p>
+
+    <p class="product-card__price">$${product.FinalPrice} (${discount}% off the Recommended Retail Price)</p>
 
     <p class="product__color">${product.Colors[0].ColorName}</p>
 
