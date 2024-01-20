@@ -24,12 +24,17 @@ export default class ProductList {
   async init() {
     // our dataSource will return a Promise...so we can use await to resolve it.
     const list = await this.dataSource.getData();
+    const filteredList = filterProducts(list);
     // render the list
-    this.renderList(list);
+    this.renderList(filteredList);
   }
   // render after doing the first stretch
   renderList(list) {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
 
+}
+
+function filterProducts(list){
+  return list.filter((product) => ["880RR", "985RF", "985PR", "344YJ"].includes(product.Id));
 }

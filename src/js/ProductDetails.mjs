@@ -12,7 +12,7 @@ function productDetailsTemplate(product){
     <img
       class="divider"
       src="${product.Image}"
-      alt="${product.NameWithoutBrand}"
+      alt="Image of ${product.NameWithoutBrand}"
     />
 
 
