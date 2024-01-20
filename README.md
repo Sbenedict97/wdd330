@@ -1,5 +1,5 @@
 # sleepoutside
-https://65a0b446967a8b746451ce11--phenomenal-tanuki-912aa4.netlify.app/
+https://phenomenal-tanuki-912aa4.netlify.app/
 
 ## Description
 
