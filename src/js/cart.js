@@ -1,11 +1,19 @@
+// Import the getLocalStorage function from the utils.mjs file
 import { getLocalStorage } from "./utils.mjs";
 
+// Function that renders the contents of the shopping cart
 function renderCartContents() {
+  // Retrieve cart items from local storage
   const cartItems = getLocalStorage("so-cart");
+
+  // Generate HTML for each cart item using the cartItemTemplate function
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+
+  // Set the innerHTML of the element with the class "product-list" to the joined HTML items
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 }
 
+// Function that generates HTML for a single cart item
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
     <a href="#" class="cart-card__image">
@@ -25,4 +33,5 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
+// Call the renderCartContents function to display the cart contents
 renderCartContents();
