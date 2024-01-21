@@ -45,3 +45,5 @@ export function getParam(param) {
 
   return product;
 }
+
+
