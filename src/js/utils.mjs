@@ -57,14 +57,13 @@ export async function loadHeaderFooter(){
   const footerTemplate = await loadTemplate("/partials/footer.html");
   const headerElement = document.querySelector("#main-header");
   const footerElement = document.querySelector("#main-footer");
-  renderWithTemplate(headerTemplate.content.cloneNode(true), headerElement);
-  renderWithTemplate(footerTemplate.content.cloneNode(true), footerElement);
+  renderWithTemplate(headerTemplate, headerElement);
+  renderWithTemplate(footerTemplate, footerElement);
 }
 
-export async function loadTemplate(path) {
-  const html = await fetch(path).then(convertToText);
-  const template = document.createElement('template');
-  template.innerHTML = html;
+async function loadTemplate(path) {
+  const res = await fetch(path);
+  const template = await res.text();
   return template;
 }
 
