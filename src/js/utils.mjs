@@ -22,6 +22,7 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
+//renders all the products on the view
 export function renderListWithTemplate(
   templateFn,
   parentElement,
@@ -35,6 +36,41 @@ export function renderListWithTemplate(
     parentElement.innerHTML = "";
   }
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
+
+//renders html with a template
+export function renderWithTemplate(
+  template,
+  parentElement,
+  data,
+  callback
+) {
+  parentElement.insertAdjacentHTML("afterbegin", template);
+  if (callback) {
+    callback(data);
+  }
+}
+
+//loads in header and footer templates
+export async function loadHeaderFooter(){
+  const headerTemplate = await loadTemplate("/partials/header.html");
+  const footerTemplate = await loadTemplate("/partials/footer.html");
+  const headerElement = document.querySelector("#main-header");
+  const footerElement = document.querySelector("#main-footer");
+  renderWithTemplate(headerTemplate.content.cloneNode(true), headerElement);
+  renderWithTemplate(footerTemplate.content.cloneNode(true), footerElement);
+}
+
+export async function loadTemplate(path) {
+  const html = await fetch(path).then(convertToText);
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  return template;
+}
+
+export function convertToText(data){
+  console.log(data);
+  return String(data);
 }
 
 // parses the URL into a string and checks for the product, it then returns the product id
