@@ -37,11 +37,45 @@ export function renderListWithTemplate(
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
 
+export async function renderWithTemplate(
+  template,
+  parentElement,
+  data,
+  callback,
+  position = "afterbegin",
+  clear = true
+) {
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+  const htmlString = await template(data);
+  
+  parentElement.insertAdjacentHTML(position, htmlString);
+  if (callback) {
+    callback(data);
+  }
+}
+
+export async function loadTemplate(path) {
+  const html = await fetch(path).then(convertToText);
+  const template = document.createElement("template");
+  template.innerHTML = html;
+  return template;
+}
+
+export async function loadHeaderFooter() {
+  const headerTemplate = await loadTemplate("/partials/header.html");
+  const footerTemplate = await loadTemplate("/partials/footer.html");
+  const headerEl = document.querySelector("#main-header");
+  const footerEl = document.querySelector("#main-footer");
+  await renderWithTemplate(headerTemplate, headerEl);
+  await renderWithTemplate(footerTemplate, footerEl);
+}
+
 // parses the URL into a string and checks for the product, it then returns the product id
+
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const product = urlParams.get("product");
-
-  return product;
+  return urlParams.get(param);
 }

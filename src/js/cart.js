@@ -1,4 +1,8 @@
 import { getLocalStorage } from "./utils.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
+
+loadHeaderFooter();
+
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
@@ -12,9 +16,11 @@ function renderCartContents() {
     const totalPrice = cartItems.reduce(
       (accumulator, currentValue) => accumulator + currentValue.FinalPrice,
       0
-     );
+    );
     // console.log(totalPrice); this line was set to test.
-    document.getElementsByClassName("cart-total")[0].innerHTML = `Total: $${totalPrice.toString()}`;
+    document.getElementsByClassName(
+      "cart-total"
+    )[0].innerHTML = `Total: $${totalPrice.toString()}`;
   }
 }
 
