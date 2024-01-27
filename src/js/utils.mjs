@@ -57,6 +57,7 @@ export async function loadHeaderFooter(){
   const footerTemplate = await loadTemplate("/partials/footer.html");
   const headerElement = document.querySelector("#main-header");
   const footerElement = document.querySelector("#main-footer");
+ 
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
 }
@@ -76,7 +77,6 @@ export function convertToText(data){
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const product = urlParams.get("product");
-
+  const product = urlParams.get(param);
   return product;
 }
