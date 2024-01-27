@@ -2,9 +2,9 @@ import { renderListWithTemplate } from "./utils.mjs";
 
 function productCardTemplate(product) {
   return `<li class="product-card">
-  <a href="product_pages/index.html?product=${product.Id}">
+  <a href="/product_pages/index.html?product=${product.Id}">
   <img
-    src="${product.Image}"
+    src="${product.Images.PrimaryMedium}"
     alt="Image of ${product.Name}"
   />
   <h3 class="card__brand">${product.Brand.Name}</h3>
@@ -23,18 +23,15 @@ export default class ProductListing {
   }
   async init() {
     // our dataSource will return a Promise...so we can use await to resolve it.
-    const list = await this.dataSource.getData();
-    const filteredList = filterProducts(list);
+    const list = await this.dataSource.getData(this.category);
     // render the list
-    this.renderList(filteredList);
+    this.renderList(list);
+    // Set title
+    document.querySelector(".title").innerHTML += this.category;
   }
   // render after doing the first stretch
   renderList(list) {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
 
-}
-
-function filterProducts(list){
-  return list.filter((product) => ["880RR", "985RF", "985PR", "344YJ"].includes(product.Id));
 }

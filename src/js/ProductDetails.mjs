@@ -11,7 +11,7 @@ function productDetailsTemplate(product){
 
     <img
       class="divider"
-      src="${product.Image}"
+      src="${product.Images.PrimaryLarge}"
       alt="Image of ${product.NameWithoutBrand}"
     />
 
@@ -35,6 +35,7 @@ export default class ProductDetails {
       this.productId = productId;
       this.product = {};
       this.dataSource = dataSource;
+      console.log(productId);
     }
     async init() {
       // use our datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it

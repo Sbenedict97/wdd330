@@ -76,6 +76,22 @@ header {
 .logo--square > div {
   margin-top: -1.7em;
 }
+.categories {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  margin: auto 175px;
+}
+.categories a.category {
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.title {
+  text-transform: capitalize;
+}
 /* utility classes */
 .highlight {
   color: var(--tertiary-color);
