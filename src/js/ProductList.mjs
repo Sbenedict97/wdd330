@@ -23,10 +23,12 @@ export default class ProductListing {
   }
   async init() {
     // our dataSource will return a Promise...so we can use await to resolve it.
-    const list = await this.dataSource.getData();
+    const list = await this.dataSource.getData(this.category);
     const filteredList = filterProducts(list);
     // render the list
     this.renderList(filteredList);
+    //set the title to the current category
+    document.querySelector(".title").innerHTML = this.category;
   }
   // render after doing the first stretch
   renderList(list) {
