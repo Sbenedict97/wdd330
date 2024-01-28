@@ -24,9 +24,10 @@ export default class ProductListing {
   async init() {
     // our dataSource will return a Promise...so we can use await to resolve it.
     const list = await this.dataSource.getData(this.category);
-    const filteredList = filterProducts(list);
+    // const filteredList = filterProducts(list);
     // render the list
-    this.renderList(filteredList);
+    // this.renderList(filteredList);
+    this.renderList(list);
     //set the title to the current category
     document.querySelector(".title").innerHTML = this.category;
   }
@@ -35,8 +36,12 @@ export default class ProductListing {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
 
+  // capitalizeFirstLetter(string) {
+  //   return string.charAt(0).toUpperCase() + string.slice(1);
+  // }
+
 }
 
-function filterProducts(list){
-  return list.filter((product) => ["880RR", "985RF", "985PR", "344YJ"].includes(product.Id));
-}
+// function filterProducts(list){
+//   return list.filter((product) => ["880RR", "985RF", "985PR", "344YJ"].includes(product.Id));
+// }
