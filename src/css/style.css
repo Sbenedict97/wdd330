@@ -159,6 +159,10 @@ button {
 .product-grid a {
   text-decoration: none;
 }
+.product-grid li a img {
+  width: 160px;
+  height: 160px;
+}
 .product-grid a:link,
 .product-grid a:visited {
   color: var(--dark-grey);
