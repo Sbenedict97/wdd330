@@ -22,20 +22,20 @@ export default class ShoppingCart {
         );
 
         document.querySelector(this.parentElement).innerHTML = htmlItems.join("");
-        document.getElementsByClassName("cart-total")[0].innerHTML = `Total: $${totalPrice.toString()}`;
+        document.getElementsByClassName("cart-total")[0].innerHTML = `Total: $${totalPrice.toFixed(2)}`;
     }
 }
 
 function cartItemTemplate(item) {
     console.log(item);
     const newItem = `<li class="cart-card divider">
-    <a href="#" class="cart-card__image">
+    <a href="/product_pages/index.html?product=${item.Id}" class="cart-card__image">
       <img
         src="${item.Images.PrimarySmall}"
         alt="${item.Name}"
       />
     </a>
-    <a href="#">
+    <a href="/product_pages/index.html?product=${item.Id}">
       <h2 class="card__name">${item.Name}</h2>
     </a>
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
