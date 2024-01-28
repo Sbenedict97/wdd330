@@ -49,7 +49,20 @@ export default class ProductDetails {
     }
     addToCart() {
         let oldCart = getLocalStorage("so-cart") || [];
-        oldCart.push(this.product);
+        let inCart = false;
+        // Check if product is in cart        
+        oldCart.forEach(element => {
+          if(this.product.Id == element.Id){
+            // If is in cart, add 1 to Quantity
+            inCart = true;
+            element.Quantity++;
+          }
+        });
+        // If not in cart, set Quantity to 1 and add product to the cart
+        if (inCart == false){
+          this.product.Quantity = parseInt(1);
+          oldCart.push(this.product);
+        }
         setLocalStorage("so-cart", oldCart);
     }
     renderProductDetails(selector) {
