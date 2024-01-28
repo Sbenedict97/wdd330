@@ -17,7 +17,7 @@ export default class ShoppingCart {
         }
         document.getElementsByClassName("cart-footer")[0].style.display = "block";
         const totalPrice = cartItems.reduce(
-            (accumulator, currentValue) => accumulator + currentValue.FinalPrice,
+            (accumulator, currentValue) => accumulator + (currentValue.FinalPrice * currentValue.Quantity),
             0
         );
 
