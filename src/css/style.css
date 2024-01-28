@@ -169,6 +169,10 @@ button {
   text-decoration: none;
   color: var(--dark-grey);
 }
+.product-list li a img {
+  width: 160px;
+  height: 160px;
+}
 /* Styles for product lists */
 .product-card {
   flex: 1 1 45%;
