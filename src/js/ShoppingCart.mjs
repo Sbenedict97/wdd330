@@ -27,7 +27,7 @@ export default class ShoppingCart {
 }
 
 function cartItemTemplate(item) {
-    console.log(item);
+    //console.log(item);
     const newItem = `<li class="cart-card divider">
     <a href="#" class="cart-card__image">
       <img

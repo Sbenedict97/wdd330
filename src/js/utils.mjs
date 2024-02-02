@@ -69,7 +69,7 @@ async function loadTemplate(path) {
 }
 
 export function convertToText(data){
-  console.log(data);
+  //console.log(data);
   return String(data);
 }
 
