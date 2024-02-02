@@ -49,6 +49,7 @@ export default class ProductDetails {
     }
     addToCart() {
         let oldCart = getLocalStorage("so-cart") || [];
+        console.log(oldCart);
         let inCart = false;
         // Check if product is in cart        
         oldCart.forEach(element => {
