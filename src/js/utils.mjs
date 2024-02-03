@@ -59,7 +59,22 @@ export async function loadHeaderFooter() {
   const footerElement = document.querySelector("#main-footer");
 
   renderWithTemplate(headerTemplate, headerElement);
+  updateSuperscriptAmount();
   renderWithTemplate(footerTemplate, footerElement);
+}
+
+export async function updateSuperscriptAmount(){
+    let item_number = 0;
+    const cart = getLocalStorage("so-cart");
+    if (cart){
+      item_number = cart.reduce((accumulator, item) => accumulator + item.Quantity, 0);
+    }
+    
+    var section = document.getElementById("superscript_amount");
+    if (section) {
+      section.innerHTML = item_number;
+    }
+
 }
 
 async function loadTemplate(path) {
@@ -97,7 +112,7 @@ export function alertMessage(message, scroll = true) {
   // make sure they see the alert by scrolling to the top of the window
   //we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
   if (scroll) window.scrollTo(0, 0);
-
+  
 }
 
 export function removeAllAlerts() {

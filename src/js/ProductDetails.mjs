@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage, alertMessage } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, alertMessage, updateSuperscriptAmount } from "./utils.mjs";
 
 function productDetailsTemplate(product){
     let discount = 100 - ((100 / product.SuggestedRetailPrice) * product.FinalPrice);
@@ -66,6 +66,7 @@ export default class ProductDetails {
           alertMessage(`${this.product.NameWithoutBrand} added to cart!`);
         }
         setLocalStorage("so-cart", oldCart);
+        updateSuperscriptAmount();
     }
     renderProductDetails(selector) {
       const element = document.querySelector(selector);

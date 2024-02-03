@@ -30,6 +30,18 @@ header {
   justify-content: space-between;
   padding: 0 10px;
 }
+
+#superscript_amount {
+  position: absolute;
+  border-radius: 8px;
+  top: 10px;
+  right: -5px;
+  background-color: var(--primary-color);
+  color: var(--dark-grey);
+  padding: 2px;
+  font-size: 13px;
+}
+
 .logo {
   line-height: 60px;
   width: 245px;
