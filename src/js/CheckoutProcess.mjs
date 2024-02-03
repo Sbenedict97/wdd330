@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, alertMessage, removeAllAlerts } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 const services = new ExternalServices();
@@ -80,10 +80,9 @@ export default class CheckoutProcess {
         orderTotal.innerText = "$" + this.orderTotal.toFixed(2);
     }
 
-    async checkout(form) {
-      // build the data object from the calculated fields, the items in the cart, and the information entered into the form
-      const formElement = document.forms["place_order"];
-
+    async checkout() {
+    const formElement = document.forms["place_order"];
+  
     const json = formDataToJSON(formElement);
     // add totals, and item details
     json.orderDate = new Date();
@@ -95,9 +94,15 @@ export default class CheckoutProcess {
     try {
       const res = await services.checkout(json);
       console.log(res);
+      setLocalStorage("so-cart", []);
+      location.assign("/checkout/success.html");
     } catch (err) {
-      console.log(err);
-    }
-      // call the checkout method in our ExternalServices module and send it our data object.
+      // get rid of any preexisting alerts.
+      removeAllAlerts();
+      for (let message in err.message) {
+        alertMessage(err.message[message]);
+      }
+        console.log(err);
+      }
     }
   }
