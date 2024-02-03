@@ -17,7 +17,7 @@ export default class ShoppingCart {
         }
         document.getElementsByClassName("cart-footer")[0].style.display = "block";
         const totalPrice = cartItems.reduce(
-            (accumulator, currentValue) => accumulator + (currentValue.FinalPrice * currentValue.Quantity),
+            (accumulator, currentValue) => accumulator + currentValue.FinalPrice,
             0
         );
 
@@ -27,7 +27,7 @@ export default class ShoppingCart {
 }
 
 function cartItemTemplate(item) {
-    //console.log(item);
+    console.log(item);
     const newItem = `<li class="cart-card divider">
     <a href="/product_pages/index.html?product=${item.Id}" class="cart-card__image">
       <img
