@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, alertMessage } from "./utils.mjs";
 
 function productDetailsTemplate(product){
     let discount = 100 - ((100 / product.SuggestedRetailPrice) * product.FinalPrice);
@@ -56,12 +56,14 @@ export default class ProductDetails {
             // If is in cart, add 1 to Quantity
             inCart = true;
             element.Quantity++;
+            alertMessage(`${this.product.NameWithoutBrand} added to cart!`);
           }
         });
         // If not in cart, set Quantity to 1 and add product to the cart
         if (inCart == false){
           this.product.Quantity = parseInt(1);
           oldCart.push(this.product);
+          alertMessage(`${this.product.NameWithoutBrand} added to cart!`);
         }
         setLocalStorage("so-cart", oldCart);
     }
