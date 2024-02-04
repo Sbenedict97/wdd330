@@ -1,50 +1,31 @@
+import { getProductsByCategory } from "./ExternalServices.mjs";
 import { renderListWithTemplate } from "./utils.mjs";
 
+
 function productCardTemplate(product) {
-  let discount = 100 - ((100 / product.SuggestedRetailPrice) * product.FinalPrice);
-  discount = parseInt(discount);
-  return `<li class="product-card">
-  <a href="/product_pages/index.html?product=${product.Id}">
-  <img
-    src="${product.Images.PrimaryMedium}"
-    alt="Image of ${product.Name}"
-  />
-  <h3 class="card__brand">${product.Brand.Name}</h3>
-  <h2 class="card__name">${product.Name}</h2>
-  <p class="product-card__price">$${product.FinalPrice}</p>
-  <p class="product-card__price">(<b>${discount}%</b> off the Recommended Retail Price)</p>
-  </a>
-</li>`;
+    return `<li class="product-card">
+    <a href="/product_pages/index.html?product=${product.Id}">
+      <img
+        src="${product.Images.PrimaryMedium}"
+        alt="Image of ${product.Name}"
+      />
+      <h3 class="card__brand">${product.Brand.Name}</h3>
+      <h2 class="card__name">${product.NameWithoutBrand}</h2>
+      <p class="product-card__price">$${product.FinalPrice}</p></a
+    >
+  </li>`;
 }
 
-export default class ProductList {
-  constructor(category, dataSource, listElement) {
-    // We passed in this information to make our class as reusable as possible.
-    // Being able to define these things when we use the class will make it very flexible
-    this.category = category;
-    this.dataSource = dataSource;
-    this.listElement = listElement;
-  }
-  async init() {
-    // our dataSource will return a Promise...so we can use await to resolve it.
-    const list = await this.dataSource.getData(this.category);
-    // render the list
-    this.renderList(list);
-    //set the title to the current category
-    document.querySelector(".title").innerHTML += this.capitalizeFirstLetter(this.category);
-  }
-  // render after doing the first stretch
-  renderList(list) {
-    renderListWithTemplate(productCardTemplate, this.listElement, list);
-  }
+export default async function productList(selector, category) {
 
-  capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+    // get the element we will insert the list into from the selector
+    const elem = document.querySelector(selector);
 
-  // render before doing the stretch
-  // renderList(list) {
-  //   const htmlStrings = list.map(productCardTemplate);
-  //   this.listElement.insertAdjacentHTML("afterbegin", htmlStrings.join(""));
-  // }
+    // get the list of products
+    const products = await getProductsByCategory(category); 
+    console.log("Product List: ", products);
+    
+    // render out the product list to the element
+    renderListWithTemplate(productCardTemplate, elem, products);
+    document.querySelector(".title").innerHTML = category;
 }

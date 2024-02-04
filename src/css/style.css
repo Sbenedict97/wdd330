@@ -30,18 +30,6 @@ header {
   justify-content: space-between;
   padding: 0 10px;
 }
-
-#superscript_amount {
-  position: absolute;
-  border-radius: 8px;
-  top: 10px;
-  right: -5px;
-  background-color: var(--primary-color);
-  color: var(--dark-grey);
-  padding: 2px;
-  font-size: 13px;
-}
-
 .logo {
   line-height: 60px;
   width: 245px;
@@ -68,6 +56,11 @@ header {
   bottom: -10px;
   background-color: white;
 }
+
+.hide {
+  display: none;
+}
+
 .logo--square {
   font-size: var(--small-font);
   width: 110px;
@@ -97,18 +90,33 @@ button {
   padding: 0.5em 2em;
   background-color: var(--secondary-color);
   color: white;
-  margin: auto;
+  margin: 2% auto;
   display: block;
   border: 0;
   font-size: var(--large-font);
+  cursor: pointer;
 }
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
-.title {
-  text-transform: capitalize;
-}
 /* End utility classes */
+
+/* Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20%;
+  grid-column-gap: 5%;
+  list-style-type: none;
+}
+
+.product-grid li {
+  /* border: black solid 1px;*/
+  text-align: center;
+  color: #000;
+  font-weight: 600;
+  font-size: 1.75rem;
+}
+/* End Product Grid */
 
 /* Cart icon styles */
 .cart {
@@ -124,40 +132,29 @@ button {
   fill: gray;
 }
 
-/* End cart icon styles */
-
-/* product grid styles */
-.product-grid {
-  list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.cart_numOfItems {
+  width: 30px;
+  height: 30px;
+  background-color: #88730c;
+  margin: 10% auto;
+  position: absolute;
+  top: -5px;
+  right: 15px;
+  border-radius: 8px;
+}
+.items_total {
+  font-size: 2vh;
+  color: #f0eeee;
+  text-shadow: 2px 2px black;
+  position: absolute;
+  width: inherit;
+  height: auto;
+  top: 50%;
+  transform: translateY(-50%);
   text-align: center;
-  color: var(--dark-grey);
-  padding-left: 0;
 }
 
-.product-grid > li {
-  width: 150px;
-  /* border: 1px solid var(--light-grey); */
-  padding: 0.5em;
-  margin: 1em;
-}
-.product-grid h2 {
-  margin: 0;
-
-  font-size: 1.2em;
-}
-.product-grid a {
-  text-decoration: none;
-}
-.product-grid a:link,
-.product-grid a:visited {
-  color: var(--dark-grey);
-}
-.product-grid a:hover {
-  text-decoration: underline;
-}
+/* End cart icon styles */
 
 .mission {
   padding: 0 0.5em;
@@ -180,59 +177,6 @@ button {
   text-decoration: none;
   color: var(--dark-grey);
 }
-
-.product-list li a img {
-  width: 160px;
-  height: 160px;
-}
-
-.list-total {
-  text-align: right;
-}
-.list-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 0.5em;
-}
-.list-footer > a {
-  /* display: block; */
-  padding: 0.3em 0.5em;
-  background-color: var(--primary-color);
-  text-decoration: none;
-  border-radius: 5px;
-}
-.list-footer a:link,
-.list-footer a:visited {
-  color: var(--dark-grey);
-}
-
-/* checkout styles */
-.checkout-form {
-  padding: 0.5em;
-}
-.checkout-form label {
-  display: block;
-}
-.checkout-form input {
-  width: 100%;
-  font-size: 1.2em;
-}
-
-.checkout-summary > ul {
-  padding-left: 0;
-  list-style-type: none;
-}
-.checkout-summary li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.checkout-summary input {
-  width: 25%;
-  font-size: 1em;
-}
-
 /* Styles for product lists */
 .product-card {
   flex: 1 1 45%;
@@ -240,7 +184,6 @@ button {
   padding: 0.5em;
   border: 1px solid var(--light-grey);
   max-width: 250px;
-  text-align: center;
 }
 .product-card h2,
 .product-card h3,
@@ -303,17 +246,39 @@ button {
   grid-column: 3;
 }
 
-/* alert styles */
-.alert {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+/* checkout styles */
+.checkout-form,
+.login-form {
   padding: 0.5em;
-  background-color: var(--primary-color);
-  border: 1px solid darkorange;
+  width: 50%;
 }
-.alert > p {
-  margin: 0;
+.checkout-form label,
+.login-form label {
+  display: block;
+}
+.checkout-form input,
+.login-form input {
+  width: 100%;
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+}
+.checkout-form fieldset,
+.login-form fieldset {
+  margin-bottom: 1rem;
+}
+
+.checkout-summary > ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+.checkout-summary li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.checkout-summary input {
+  width: 25%;
+  font-size: 1em;
 }
 
 @media screen and (min-width: 500px) {
