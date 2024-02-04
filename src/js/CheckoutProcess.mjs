@@ -14,7 +14,7 @@ function formDataToJSON(formElement) {
 
 function packageItems(items) {
   const simplifiedItems = items.map((item) => {
-    console.log(item);
+    console.log(item) 
     return {
       id: item.Id,
       price: item.FinalPrice,
@@ -47,7 +47,7 @@ const checkoutProcess = {
       this.outputSelector + " #num-items"
     );
     itemNumElement.innerText = this.list.length;
-    // calculate the total of all the items in the cart
+   
     const amounts = this.list.map((item) => item.FinalPrice);
     this.itemTotal = amounts.reduce((sum, item) => sum + item);
     summaryElement.innerText = "$" + this.itemTotal;
@@ -74,20 +74,20 @@ const checkoutProcess = {
   },
   checkout: async function (form) {
     const json = formDataToJSON(form);
-    // add totals, and item details
+   
     json.orderDate = new Date();
     json.orderTotal = this.orderTotal;
     json.tax = this.tax;
     json.shipping = this.shipping;
     json.items = packageItems(this.list);
-    console.log(json);
+    console.log(json); 
     try {
       const res = await checkout(json);
-      console.log(res);
+      console.log(res); 
       setLocalStorage("so-cart", []);
       location.assign("/checkout/success.html");
     } catch (err) {
-      console.log(err);
+      console.log(err); 
     }
   },
 };
