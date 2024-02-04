@@ -24,7 +24,6 @@ function cartItemTemplate(item) {
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: 1</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
-  <span class="delete-product">❌</span>
 </li>`;
 
   return newItem;
@@ -66,4 +65,3 @@ function calculateListTotal(list) {
   const total = amounts.reduce((sum, item) => sum + item, 0);
   return total;
 }
-

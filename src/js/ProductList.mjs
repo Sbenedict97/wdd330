@@ -1,4 +1,4 @@
-import { getProductsByCategory } from "./ExternalServices.mjs";
+import { getProductsByCategory } from "./externalServices.mjs";
 import { renderListWithTemplate } from "./utils.mjs";
 
 
