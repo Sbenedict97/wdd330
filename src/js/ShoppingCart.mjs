@@ -4,6 +4,7 @@ export default class ShoppingCart {
     constructor (key, parentElement){
         this.key = key;
         this.parentElement = parentElement;
+        this.total = 0;
     }
 
     renderCartContents(){
@@ -16,18 +17,16 @@ export default class ShoppingCart {
             htmlItems = cartItems.map((item) => cartItemTemplate(item));
         }
         document.getElementsByClassName("cart-footer")[0].style.display = "block";
-        const totalPrice = cartItems.reduce(
-            (accumulator, currentValue) => accumulator + (currentValue.FinalPrice * currentValue.Quantity),
-            0
-        );
+        const amounts = cartItems.map((item) => item.FinalPrice * item.Quantity);
+        this.total = amounts.reduce((sum, item) => sum + item);
 
         document.querySelector(this.parentElement).innerHTML = htmlItems.join("");
-        document.getElementsByClassName("cart-total")[0].innerHTML = `Total: $${totalPrice.toFixed(2)}`;
+        document.getElementsByClassName("cart-total")[0].innerHTML = `Total: $${this.total.toFixed(2)}`;
     }
 }
 
 function cartItemTemplate(item) {
-    //console.log(item);
+    console.log(item);
     const newItem = `<li class="cart-card divider">
     <a href="/product_pages/index.html?product=${item.Id}" class="cart-card__image">
       <img

@@ -59,7 +59,22 @@ export async function loadHeaderFooter() {
   const footerElement = document.querySelector("#main-footer");
 
   renderWithTemplate(headerTemplate, headerElement);
+  updateSuperscriptAmount();
   renderWithTemplate(footerTemplate, footerElement);
+}
+
+export async function updateSuperscriptAmount(){
+    let item_number = 0;
+    const cart = getLocalStorage("so-cart");
+    if (cart){
+      item_number = cart.reduce((accumulator, item) => accumulator + item.Quantity, 0);
+    }
+    
+    var section = document.getElementById("superscript_amount");
+    if (section) {
+      section.innerHTML = item_number;
+    }
+
 }
 
 async function loadTemplate(path) {
@@ -69,7 +84,7 @@ async function loadTemplate(path) {
 }
 
 export function convertToText(data){
-  //console.log(data);
+  console.log(data);
   return String(data);
 }
 
@@ -80,4 +95,27 @@ export function getParam(param) {
   const product = urlParams.get(param);
 
   return product;
+}
+
+export function alertMessage(message, scroll = true) {
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.innerHTML = `<p>${message}</p><span>X</span>`;
+
+  alert.addEventListener("click", function (e) {
+    if (e.target.tagName == "SPAN") {
+      main.removeChild(this);
+    }
+  });
+  const main = document.querySelector("main");
+  main.prepend(alert);
+  // make sure they see the alert by scrolling to the top of the window
+  //we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
+  if (scroll) window.scrollTo(0, 0);
+  
+}
+
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll(".alert");
+  alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
 }
