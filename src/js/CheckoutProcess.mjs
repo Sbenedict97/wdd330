@@ -41,6 +41,7 @@ export default class CheckoutProcess {
     init() {
       this.list = getLocalStorage(this.key);
       this.calculateItemSummary();
+      this.calculateOrdertotal();
     }
   
     calculateItemSummary() {
@@ -63,7 +64,7 @@ export default class CheckoutProcess {
     calculateOrdertotal() {
       // calculate the shipping and tax amounts. Then use them to along with the cart total to figure out the order total
       this.shipping = 10 + ((this.totalItems - 1) * 2);
-      this.tax = (this.shipping + this.itemTotal) * 0.06;
+      this.tax = this.itemTotal * 0.06;
       this.orderTotal = this.itemTotal + this.tax + this.shipping;
       // display the totals.
       this.displayOrderTotals();
