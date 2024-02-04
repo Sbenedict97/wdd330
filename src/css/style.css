@@ -93,7 +93,8 @@ header {
   color: var(--tertiary-color);
 }
 
-button, .checkoutBtn {
+button,
+.checkoutBtn {
   padding: 0.5em 2em;
   background-color: var(--secondary-color);
   color: white;
@@ -102,7 +103,7 @@ button, .checkoutBtn {
   border: 0;
   font-size: var(--large-font);
 }
-.checkoutBtn{
+.checkoutBtn {
   width: fit-content;
   text-decoration: none;
 }
