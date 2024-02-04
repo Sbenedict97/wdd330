@@ -1,46 +1,67 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, renderListWithTemplate } from "./utils.mjs";
 
-export default class ShoppingCart {
-    constructor (key, parentElement){
-        this.key = key;
-        this.parentElement = parentElement;
-        this.total = 0;
-    }
+export default function ShoppingCart() {
+  const cartItems = getLocalStorage("so-cart");
+  const outputEl = document.querySelector(".product-list");
+  renderListWithTemplate(cartItemTemplate, outputEl, cartItems);
 
-    renderCartContents(){
-        const cartItems = getLocalStorage(this.key);
-        let htmlItems = "";
-        if (cartItems == null) {
-            document.querySelector(".product-list").innerHTML =
-              "Ready to fill your cart with camping wonders. Let the shopping adventure begin!";
-        } else {
-            htmlItems = cartItems.map((item) => cartItemTemplate(item));
-        }
-        document.getElementsByClassName("cart-footer")[0].style.display = "block";
-        const amounts = cartItems.map((item) => item.FinalPrice * item.Quantity);
-        this.total = amounts.reduce((sum, item) => sum + item);
-
-        document.querySelector(this.parentElement).innerHTML = htmlItems.join("");
-        document.getElementsByClassName("cart-total")[0].innerHTML = `Total: $${this.total.toFixed(2)}`;
-    }
+  itemsInCart(cartItems);
+  const total = calculateListTotal(cartItems);
+  displayCartTotal(total);
 }
 
 function cartItemTemplate(item) {
-    console.log(item);
-    const newItem = `<li class="cart-card divider">
-    <a href="/product_pages/index.html?product=${item.Id}" class="cart-card__image">
-      <img
-        src="${item.Images.PrimarySmall}"
-        alt="${item.Name}"
-      />
-    </a>
-    <a href="/product_pages/index.html?product=${item.Id}">
-      <h2 class="card__name">${item.Name}</h2>
-    </a>
-    <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">qty: ${item.Quantity}</p>
-    <p class="cart-card__price">$${item.FinalPrice}</p>
-  </li>`;
-  
-    return newItem;
+  const newItem = `<li class="cart-card divider">
+  <a href="#" class="cart-card__image">
+    <img
+      src="${item.Images.PrimaryMedium}"
+      alt="${item.Name}"
+    />
+  </a>
+  <a href="#">
+    <h2 class="card__name">${item.Name}</h2>
+  </a>
+  <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+  <p class="cart-card__quantity">qty: 1</p>
+  <p class="cart-card__price">$${item.FinalPrice}</p>
+</li>`;
+
+  return newItem;
+}
+
+function itemsInCart(cartItems) {
+  let numberInCart = 0;
+  if (cartItems !== null) {
+    for (let i = 0; i < cartItems.length; i++) {
+      numberInCart += 1;
+    }
+  }
+
+  showNumberOfCartItems(numberInCart);
+}
+
+function showNumberOfCartItems(list) {
+  console.log("Total Items: ", list);
+
+  if (list >= 1) {
+    let el = document.getElementById("numberOfItems");
+    el.classList.add("cart_numOfItems");
+    document.getElementById("total_items_in_cart").innerHTML = list;
+  }
+}
+
+function displayCartTotal(total) {
+  if (total > 0) {
+    // show our checkout button and total if there are items in the cart.
+    document.querySelector(".list-footer").classList.remove("hide");
+    document.querySelector(".list-total").innerText += ` $${total}`;
+  } else {
+    document.querySelector(".list-footer").classList.add("hide");
+  }
+}
+
+function calculateListTotal(list) {
+  const amounts = list.map((item) => item.FinalPrice);
+  const total = amounts.reduce((sum, item) => sum + item, 0);
+  return total;
 }

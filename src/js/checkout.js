@@ -1,20 +1,31 @@
 import { loadHeaderFooter } from "./utils.mjs";
-import CheckoutProcess from "./CheckoutProcess.mjs";
+import checkoutProcess from "./checkoutProcess.mjs";
 
 loadHeaderFooter();
 
-const myCheckout = new CheckoutProcess("so-cart", ".checkout-summary");
-myCheckout.init();
+checkoutProcess.init("so-cart", ".checkout-summary");
 
 document
   .querySelector("#zip")
-  .addEventListener("blur", myCheckout.calculateOrdertotal.bind(myCheckout));
-// listening for click on the button
-document.querySelector('#checkoutSubmit').addEventListener('click', (e) => {
+  .addEventListener(
+    "blur",
+    checkoutProcess.calculateOrdertotal.bind(checkoutProcess)
+  );
+
+// this is how it would look if we listen for the submit on the form
+document.forms["checkout"].addEventListener("submit", (e) => {
   e.preventDefault();
-  const myForm = document.forms[0];
-  const chk_status = myForm.checkValidity();
+  /* var myForm = document.forms[0];
+  var chk_status = myForm.checkValidity();
   myForm.reportValidity();
-  if(chk_status)
-    myCheckout.checkout();
-  });
+  if (chk_status)*/
+  // e.target would contain our form in this case
+  checkoutProcess.checkout(e.target);
+});
+
+// listening for click on the button
+// document.querySelector("#checkoutSubmit").addEventListener("click", (e) => {
+//   e.preventDefault();
+
+//   checkoutProcess.checkout(document.forms['checkout']);
+// });
