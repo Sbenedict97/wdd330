@@ -7,7 +7,8 @@ async function convertToJson(res) {
   if (res.ok) {
     return res.json();
   } else {
-    throw { name: "servicesError", message: jsonResponse };
+    const jsonResponse = await res.json(); 
+    throw { name: "servicesError", message: jsonResponse }; 
   }
 }
 
