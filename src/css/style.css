@@ -210,7 +210,7 @@ button {
 /* Start cart list card styles */
 .cart-card {
   display: grid;
-  grid-template-columns: 25% auto 15%;
+  grid-template-columns: 25% auto 15% 5%;
   font-size: var(--small-font);
   /* max-height: 120px; */
   align-items: center;
@@ -253,7 +253,7 @@ button {
   }
   .cart-card {
     font-size: inherit;
-    grid-template-columns: 150px auto 15%;
+    grid-template-columns: 150px auto 15% 5%;
   }
 }
 

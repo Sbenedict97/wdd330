@@ -43,6 +43,7 @@ function cartItemTemplate(item) {
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
     <p class="cart-card__quantity">qty: ${item.Quantity}</p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
+    <span data-id="${item.Id}">❌</span>
   </li>`;
 
   return newItem;
