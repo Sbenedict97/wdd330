@@ -111,7 +111,7 @@ export function alertMessage(message, scroll = true) {
   main.prepend(alert);
   // make sure they see the alert by scrolling to the top of the window
   //we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
-  if (scroll) window.scrollTo(0, 0);
+  //if (scroll) window.scrollTo(0, 0);
   
 }
 
